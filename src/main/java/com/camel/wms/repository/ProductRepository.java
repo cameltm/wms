@@ -1,6 +1,6 @@
 package com.camel.wms.repository;
 
-import com.bsuir.WarehouseManagementSystem.model.Product;
+import com.camel.wms.model.Product;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

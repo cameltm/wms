@@ -1,13 +1,12 @@
 package com.camel.wms.service;
 
 
-import com.bsuir.WarehouseManagementSystem.model.Box;
-import com.bsuir.WarehouseManagementSystem.model.Position;
-import com.bsuir.WarehouseManagementSystem.model.Product;
-import com.bsuir.WarehouseManagementSystem.repository.*;
+import com.camel.wms.model.Box;
+import com.camel.wms.model.Position;
+import com.camel.wms.model.Product;
+import com.camel.wms.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,47 +27,49 @@ public class ProductService {
     @Autowired
     private PositionService positionService;
 
-    public Product getByDescription(String description){
+    public Product getByDescription(String description) {
         return productRepository.getByDescription(description);
     }
 
-    public List<Product> findAll(){return productRepository.findAll();}
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
 
-    public Product getProductById(Long productId){
+    public Product getProductById(Long productId) {
         return productRepository.findById(productId).orElseThrow();
     }
 
-    public List<ProductGetters> getAllProducts(){
+    public List<ProductGetters> getAllProducts() {
         return productRepository.getAllProducts();
     }
 
-    public Integer getProductsQuantity(Long productId){
+    public Integer getProductsQuantity(Long productId) {
         return productRepository.getProductsQuantity(productId);
     }
 
-    public void save(Product product){
+    public void save(Product product) {
         productRepository.save(product);
     }
 
-    public void editProduct(Product product){
+    public void editProduct(Product product) {
         Product updatedProduct = productRepository.findById(product.getId()).orElseThrow();
         updatedProduct.setDescription(product.getDescription());
         productRepository.save(updatedProduct);
     }
 
 
-    public void removeProduct(Long productId){
+    public void removeProduct(Long productId) {
 
         List<BoxGetters> list = boxRepository.getBoxesAndPositionId(productId);
 
-        Map<Long,Integer> map = new HashMap<>();
-        for(BoxGetters obj : list){
-            map.put(obj.getPositionId(),obj.getBoxesAmount());
+        Map<Long, Integer> map = new HashMap<>();
+        for (BoxGetters obj : list) {
+            map.put(obj.getPositionId(), obj.getBoxesAmount());
         }
 
         for (Map.Entry<Long, Integer> entry : map.entrySet()) {
 
-            positionService.reducePositionFullness(entry.getKey(),entry.getValue());
+            positionService.reducePositionFullness(entry.getKey(), entry.getValue());
             //reducePositionFullness(entry.getKey(),entry.getValue());
         }
 
@@ -76,41 +77,36 @@ public class ProductService {
     }
 
 
-
-
-    public void acceptProduct(Long productId,Integer receivedProductsQuantity){
+    public void acceptProduct(Long productId, Integer receivedProductsQuantity) {
 
         List<BoxGetters> uncompletedBoxesIdList = boxRepository.getUncompletedBoxesByProductId(productId);
 
-        if(uncompletedBoxesIdList.size() > 0){
+        if (uncompletedBoxesIdList.size() > 0) {
             Integer uncompletedPlacesInBoxesAmount = boxRepository.getUncompletedPlacesInBoxesAmount(productId);
 
-            if(receivedProductsQuantity > uncompletedPlacesInBoxesAmount){
+            if (receivedProductsQuantity > uncompletedPlacesInBoxesAmount) {
                 Integer productsForNewBoxesQuantity = receivedProductsQuantity - uncompletedPlacesInBoxesAmount;
                 receivedProductsQuantity = receivedProductsQuantity - productsForNewBoxesQuantity;
 
-                productsPlacement(productsForNewBoxesQuantity,productId);
+                productsPlacement(productsForNewBoxesQuantity, productId);
             }
 
-            productsPlacement(uncompletedBoxesIdList,receivedProductsQuantity);
-        }
-
-        else{
-            productsPlacement(receivedProductsQuantity,productId);
+            productsPlacement(uncompletedBoxesIdList, receivedProductsQuantity);
+        } else {
+            productsPlacement(receivedProductsQuantity, productId);
         }
     }
 
     public void productsPlacement(List<BoxGetters> uncompletedBoxesIdList,
-                                  Integer receivedProductsQuantity){
+                                  Integer receivedProductsQuantity) {
 
-        for(BoxGetters obj : uncompletedBoxesIdList){
+        for (BoxGetters obj : uncompletedBoxesIdList) {
 
             Box box = boxRepository.getBoxById(obj.getBoxId());
 
-            if(receivedProductsQuantity <= box.getCapacity() - box.getFullness()){
+            if (receivedProductsQuantity <= box.getCapacity() - box.getFullness()) {
                 box.setFullness(box.getFullness() + receivedProductsQuantity);
-            }
-            else{
+            } else {
                 receivedProductsQuantity = receivedProductsQuantity - (box.getCapacity() - box.getFullness());
                 box.setFullness(box.getCapacity());
             }
@@ -119,42 +115,40 @@ public class ProductService {
         }
     }
 
-    public void productsPlacement(Integer productsForNewBoxesQuantity,Long productId){
-        Double requiredBoxesQuantity = Math.ceil((double)productsForNewBoxesQuantity/boxRepository.getBoxCapacity());
+    public void productsPlacement(Integer productsForNewBoxesQuantity, Long productId) {
+        Double requiredBoxesQuantity = Math.ceil((double) productsForNewBoxesQuantity / boxRepository.getBoxCapacity());
 
-        for(int i=0; i < requiredBoxesQuantity; i++){
-            createAndPlaceBox(productId,productsForNewBoxesQuantity);
+        for (int i = 0; i < requiredBoxesQuantity; i++) {
+            createAndPlaceBox(productId, productsForNewBoxesQuantity);
             productsForNewBoxesQuantity = productsForNewBoxesQuantity - boxRepository.getBoxCapacity();
         }
 
     }
 
-    public void createAndPlaceBox(Long productId,Integer productsForNewBoxesQuantity){
+    public void createAndPlaceBox(Long productId, Integer productsForNewBoxesQuantity) {
         List<Long> positionIdList = positionRepository.getUncompletedPositionId();
 
-        if(positionIdList.size() > 0){
+        if (positionIdList.size() > 0) {
             Long positionId = positionIdList.get(0);
 
             Position position = positionRepository.findById(positionId).orElseThrow();
             Product product = productRepository.findById(productId).orElseThrow();
 
-            if(productsForNewBoxesQuantity <= boxRepository.getBoxCapacity()){
+            if (productsForNewBoxesQuantity <= boxRepository.getBoxCapacity()) {
                 Box box = new Box(productsForNewBoxesQuantity,
                         boxRepository.getBoxCapacity(),
-                        position,product);
+                        position, product);
 
                 boxRepository.save(box);
-            }
-
-            else{
+            } else {
                 Box box = new Box(boxRepository.getBoxCapacity(),
                         boxRepository.getBoxCapacity(),
-                        position,product);
+                        position, product);
 
                 boxRepository.save(box);
             }
 
-            position.setFullness(position.getFullness()+1);
+            position.setFullness(position.getFullness() + 1);
             positionRepository.save(position);
         }
 
@@ -164,19 +158,18 @@ public class ProductService {
     }
 
 
-    public void productsSelect(Long productId,Integer quantity){
+    public void productsSelect(Long productId, Integer quantity) {
         List<Box> boxesList = boxRepository.getBoxIdByProduct(productId);
 
-        for(Box box : boxesList){
-            if(quantity>0){
-                if(box.getFullness() <= quantity){
+        for (Box box : boxesList) {
+            if (quantity > 0) {
+                if (box.getFullness() <= quantity) {
                     quantity = quantity - box.getFullness();
                     Long positionId = box.getPosition().getId();
-                    positionService.reducePositionFullness(positionId,1);
+                    positionService.reducePositionFullness(positionId, 1);
                     boxRepository.deleteById(box.getId());
-                }
-                else{
-                    box.setFullness(box.getFullness()-quantity);
+                } else {
+                    box.setFullness(box.getFullness() - quantity);
                     boxRepository.save(box);
                     quantity = 0;
                 }

@@ -1,7 +1,6 @@
 package com.camel.wms.controller;
 
 
-import com.bsuir.WarehouseManagementSystem.model.Product;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,15 +12,14 @@ import java.util.Map;
 public class MainController {
 
     @GetMapping("/")
-    public String main(Map<String,Object> model){
+    public String main(Map<String, Object> model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = String.valueOf(auth.getAuthorities());
 
-        if(role.equals("[ADMIN]")){
+        if (role.equals("[ADMIN]")) {
             return "redirect:/getUsers";
-        }
-        else if(role.equals("[CHECKMAN]")){
+        } else if (role.equals("[CHECKMAN]")) {
             return "redirect:/getProducts";
         }
 

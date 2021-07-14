@@ -1,19 +1,14 @@
 package com.camel.wms.service;
 
-import com.bsuir.WarehouseManagementSystem.model.Role;
-import com.bsuir.WarehouseManagementSystem.model.User;
-import com.bsuir.WarehouseManagementSystem.repository.UserRepository;
+import com.camel.wms.model.User;
+import com.camel.wms.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -30,7 +25,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public void saveUser(User user){
+    public void saveUser(User user) {
         User updatedUser = userRepository.findById(user.getId()).orElseThrow();
         updatedUser.setUsername(user.getUsername());
         updatedUser.setPassword(user.getPassword());
@@ -38,11 +33,11 @@ public class UserService implements UserDetailsService {
         userRepository.save(updatedUser);
     }
 
-    public void removeUser(Long userId){
+    public void removeUser(Long userId) {
         userRepository.deleteById(userId);
     }
 
-    public User getUserByUsername(String username){
+    public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 }

@@ -1,7 +1,7 @@
 package com.camel.wms.service;
 
-import com.bsuir.WarehouseManagementSystem.model.Box;
-import com.bsuir.WarehouseManagementSystem.repository.BoxRepository;
+import com.camel.wms.model.Box;
+import com.camel.wms.repository.BoxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +12,15 @@ public class BoxService {
     @Autowired
     private BoxRepository boxRepository;
 
-    public List<Box> getAllBoxes(){return boxRepository.getAllBoxes();}
+    public List<Box> getAllBoxes() {
+        return boxRepository.getAllBoxes();
+    }
 
     public List<Box> findAll() {
         return boxRepository.findAll();
     }
 
-    public Box findById(Long boxId){return boxRepository.findById(boxId).orElseThrow();}
+    public Box findById(Long boxId) {
+        return boxRepository.findById(boxId).orElseThrow();
+    }
 }
