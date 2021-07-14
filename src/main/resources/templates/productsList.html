@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products list</title>
+
+    <div th:insert="bootstrap/bootstrapCSS.html"></div>
+</head>
+<body>
+<div th:insert="navbars/checkmanNav.html"></div>
+
+<div class="container mt-5">
+    <div>
+
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+            <tr>
+                <th>Описание</th>
+                <th>Количество</th>
+                <th>Редактирование</th>
+            </tr>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <tr th:each="product : ${products}">
+                <td th:utext="${product.getValue}">Описание</td>
+                <td th:utext="${product.getKey}">Количество</td>
+                <td><a th:href="'/product/'+${product.getValue()}+'/edit'">Редактировать</a></td>
+            </tr>
+            </tr>
+            </tbody>
+        </table>
+
+        <div th:insert="bootstrap/bootstrapJS.html"></div>
+    </div>
+</div>
+

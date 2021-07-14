@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create order</title>
+
+    <div th:insert="bootstrap/bootstrapCSS.html"></div>
+</head>
+<body>
+<div th:insert="navbars/userNav.html"></div>
+
+<div class="container mt-5">
+    <div>
+
+        <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}">
+        </div>
+
+        <form action="/order/create" method="post">
+            <label>
+                <select class="form-control form-group" name="selectProductId" id="selectProductId">
+                    <option value="">Выберите продукт</option>
+                    <option
+                            th:each="product : ${products}"
+                            th:value="${product.id}"
+                            th:selected="${product.description}"
+                            th:text="${product.description}">
+                    </option>
+                </select>
+
+                <div class="form-group">
+                    <input type="number" class="form-control" min="1" step="1" required name="quantity" placeholder="Количество">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" required name="address" placeholder="Адрес">
+                </div>
+
+            </label>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Заказать</button>
+            </div>
+        </form>
+
+        <div th:insert="bootstrap/bootstrapJS.html"></div>
+    </div>
+</div>
+

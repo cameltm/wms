@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Boxes list</title>
+
+    <div th:insert="bootstrap/bootstrapCSS.html"></div>
+</head>
+<body>
+<div th:insert="navbars/checkmanNav.html"></div>
+
+<div class="container mt-5">
+    <div>
+        <form action="/findBox" method="post">
+            <input type="number" min="1" step="1" class="form-control" name="filter" placeholder="Поиск">
+
+            <div class="mt-2 mb-2">
+                <button type="submit" class="btn btn-primary">Поиск</button>
+            </div>
+        </form>
+
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+            <tr>
+                <th>Код коробки</th>
+                <th>Вместимость</th>
+                <th>Заполненность</th>
+                <th>Код ячейки</th>
+                <th>Продукт</th>
+            </tr>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <tr th:each="box : ${boxes}">
+                <td th:utext="${box.id}">Код коробки</td>
+                <td th:utext="${box.capacity}">Вместимость</td>
+                <td th:utext="${box.fullness}">Заполненность</td>
+                <td th:utext="${box.position.code}">Код ячейки</td>
+                <td th:utext="${box.product.description}">Продукт</td>
+            </tr>
+            </tr>
+            </tbody>
+        </table>
+
+        <div th:insert="bootstrap/bootstrapJS.html"></div>
+    </div>
+</div>
+

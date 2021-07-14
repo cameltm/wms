@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Profile</title>
+
+    <div th:insert="bootstrap/bootstrapCSS.html"></div>
+</head>
+
+<div sec:authorize="hasAuthority('CHECKMAN')" th:insert="navbars/checkmanNav.html"></div>
+<div sec:authorize="hasAuthority('ADMIN')" th:insert="navbars/adminNav.html"> </div>
+<div sec:authorize="hasAuthority('USER')" th:insert="navbars/userNav.html"> </div>
+
+<div class="container mt-5">
+    <body>
+
+    <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+    <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+
+    <form th:action="'/user/update'" method="post">
+        <input type="hidden" th:value="${user.id}" name="id">
+
+        <div class="form-group">
+            <label>Логин</label>
+            <input type="text" class="form-control" required th:value="${user.username}" name="username" placeholder="Логин">
+        </div>
+
+        <div class="form-group">
+            <label>Пароль</label>
+            <input type="text" class="form-control" required th:value="${user.password}" name="password" placeholder="Пароль">
+        </div>
+
+        <div class="form-group">
+            <label>Имя</label>
+            <input type="text" class="form-control" required th:value="${user.fullName}" name="fullName" placeholder="Имя">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Обновить</button>
+
+    </form>
+
+    <div th:insert="bootstrap/bootstrapJS.html"></div>
+
+    </body>
+</div>
+</html>
+

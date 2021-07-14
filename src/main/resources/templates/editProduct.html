@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Product edit</title>
+
+    <div th:insert="bootstrap/bootstrapCSS.html"></div>
+</head>
+
+<div th:insert="navbars/checkmanNav.html"></div>
+<div class="container mt-5">
+    <body>
+
+
+    <form th:action="'/product/edit'" method="post">
+
+        <input type="hidden" th:value="${product.id}" name="id">
+
+        <div class="form-group">
+            <label>Описание</label>
+            <input type="text" class="form-control" required th:value="${product.description}" name="description"
+                   placeholder="Описание">
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </form>
+
+    <div class="mt-3">
+        <form th:action="'/product/'+ ${product.id} +'/remove'" method="post">
+
+            <button class="btn btn-danger" type="submit">Удалить продукт</button>
+        </form>
+    </div>
+
+
+    <div th:insert="bootstrap/bootstrapJS.html"></div>
+
+    </body>
+</div>
+</html>
+
+
+
+
+
+
+

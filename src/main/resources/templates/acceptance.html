@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Acceptance</title>
+
+    <div th:insert="bootstrap/bootstrapCSS.html"></div>
+</head>
+<div th:insert="navbars/checkmanNav.html"></div>
+
+<div class="container mt-5">
+    <body>
+
+    <form action="/acceptance" method="post">
+            <label>
+                <select class="form-control form-group" name="selectId" id="selectId">
+                    <option value="">Выберите продукт</option>
+                    <option
+                            th:each="product : ${products}"
+                            th:value="${product.id}"
+                            th:selected="${product.description}"
+                            th:text="${product.description}">
+                    </option>
+                </select>
+                <div class="form-group">
+                    <input type="number" class="form-control" min="1" step="1" required name="quantity" placeholder="Количество">
+                </div>
+            </label>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+
+    </form>
+
+    <div th:insert="bootstrap/bootstrapJS.html"></div>
+
+    </body>
+</div>
+</html>

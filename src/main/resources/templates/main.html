@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+<div th:insert="navbars/adminNav">
+
+</div>
+<div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+
+<div>
+    <form method="post">
+        <label>
+            <input type="text" name="description" placeholder="описание">
+        </label>
+        <button type="submit">Добавить</button>
+    </form>
+
+</div>
+</body>
+</html>

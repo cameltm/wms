@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Checkman create</title>
+
+    <div th:insert="bootstrap/bootstrapCSS.html"></div>
+</head>
+
+<div th:insert="navbars/adminNav.html"></div>
+<div class="container mt-5">
+    <body>
+
+    <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+    <form th:action="'/checkman/create'" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" required name="username" placeholder="Логин">
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" required name="password" placeholder="Пароль">
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" required name="fullName" placeholder="Имя">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Создать</button>
+    </form>
+
+    <div th:insert="bootstrap/bootstrapJS.html"></div>
+
+    </body>
+</div>
+</html>
+
+
+
+
