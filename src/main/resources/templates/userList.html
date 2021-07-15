@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:insert="bootstrap/bootstrapCSS.html">
     <meta charset="UTF-8">
     <title>User list</title>
-
-    <div th:insert="bootstrap/bootstrapCSS.html"></div>
 </head>
+
 <body>
 <div th:insert="navbars/adminNav.html"></div>
 
 <div class="container mt-5">
     <div>
         <form action="/findUser" method="post">
-            <input type="text" class="form-control" name="filter" placeholder="Поиск">
+            <label>
+                <input type="text" class="form-control" name="filter" placeholder="Поиск">
+            </label>
 
             <div class="mt-2 mb-2">
                 <button type="submit" class="btn btn-primary">Поиск</button>
@@ -23,24 +23,20 @@
         <table class="table">
             <thead class="thead-dark">
             <tr>
-            <tr>
                 <th>Логин</th>
                 <th>Имя</th>
                 <th>Пароль</th>
                 <th>Роль</th>
                 <th>Редактирование</th>
             </tr>
-            </tr>
             </thead>
             <tbody>
-            <tr>
             <tr th:each="user : ${users}">
-                <td th:utext="${user.username}"> </td>
+                <td th:utext="${user.username}"></td>
                 <td th:utext="${user.fullName}"></td>
                 <td th:utext="${user.password}"></td>
                 <td th:utext="${user.roles}"></td>
-                <td><a th:href="'/user/' + ${user.id}+'/edit'">Редактировать</a> </td>
-            </tr>
+                <td><a th:href="'/user/' + ${user.id}+'/edit'">Редактировать</a></td>
             </tr>
             </tbody>
         </table>
@@ -49,3 +45,5 @@
     </div>
 </div>
 
+</body>
+</html>

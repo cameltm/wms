@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:insert="bootstrap/bootstrapCSS.html">
     <meta charset="UTF-8">
     <title>Boxes list</title>
-
-    <div th:insert="bootstrap/bootstrapCSS.html"></div>
 </head>
+
 <body>
+
 <div th:insert="navbars/checkmanNav.html"></div>
 
 <div class="container mt-5">
@@ -49,3 +49,5 @@
     </div>
 </div>
 
+</body>
+</html>

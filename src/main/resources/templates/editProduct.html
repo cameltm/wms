@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="ru">
+<head th:insert="bootstrap/bootstrapCSS.html">
+    <meta charset="UTF-8">
     <title>Product edit</title>
-
-    <div th:insert="bootstrap/bootstrapCSS.html"></div>
 </head>
 
-<div th:insert="navbars/checkmanNav.html"></div>
-<div class="container mt-5">
-    <body>
+<body>
 
+<div th:insert="navbars/checkmanNav.html"></div>
+
+<div class="container mt-5">
 
     <form th:action="'/product/edit'" method="post">
 
         <input type="hidden" th:value="${product.id}" name="id">
 
         <div class="form-group">
-            <label>Описание</label>
-            <input type="text" class="form-control" required th:value="${product.description}" name="description"
-                   placeholder="Описание">
+            <label>Описание
+                <input type="text" class="form-control" required th:value="${product.description}" name="description"
+                       placeholder="Описание">
+            </label>
         </div>
         <button type="submit" class="btn btn-primary">Сохранить изменения</button>
     </form>
@@ -34,8 +34,9 @@
 
     <div th:insert="bootstrap/bootstrapJS.html"></div>
 
-    </body>
 </div>
+
+</body>
 </html>
 
 

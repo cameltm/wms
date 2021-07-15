@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:insert="bootstrap/bootstrapCSS.html">
     <meta charset="UTF-8">
     <title>User orders list</title>
-
-    <div th:insert="bootstrap/bootstrapCSS.html"></div>
 </head>
+
 <body>
 <div th:insert="navbars/userNav.html"></div>
-
 <div class="container mt-5">
     <div>
 
         <table class="table">
             <thead class="thead-dark">
-            <tr>
             <tr>
                 <th>Продукт</th>
                 <th>Количество</th>
@@ -23,13 +19,12 @@
                 <th>Статус</th>
                 <th>Удаление</th>
             </tr>
-            </tr>
             </thead>
+
             <tbody>
-            <tr>
             <tr th:each="order : ${orders}">
 
-                <td th:utext="${order.product.description}"> </td>
+                <td th:utext="${order.product.description}"></td>
                 <td th:utext="${order.quantity}"></td>
                 <td th:utext="${order.address}"></td>
                 <td th:utext="${order.status}"></td>
@@ -48,4 +43,5 @@
         <div th:insert="bootstrap/bootstrapJS.html"></div>
     </div>
 </div>
-
+</body>
+</html>

@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
+      lang="ru">
+<head th:insert="bootstrap/bootstrapCSS.html">
     <title>Add product</title>
-
-    <div th:insert="bootstrap/bootstrapCSS.html"></div>
 </head>
+
+<body>
 <div th:insert="navbars/checkmanNav.html"></div>
 
 <div class="container mt-5">
-    <body>
 
     <form action="/addProduct" method="post">
         <div class="form-group">
-            <input type="text" class="form-control" required name="description" placeholder="Описание">
+            <label>
+                <input type="text" class="form-control" required name="description" placeholder="Описание">
+            </label>
         </div>
         <button type="submit" class="btn btn-primary">Добавить</button>
     </form>
 
     <div th:insert="bootstrap/bootstrapJS.html"></div>
 
-    </body>
 </div>
+</body>
 </html>

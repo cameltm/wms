@@ -1,29 +1,33 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="ru">
+<head th:insert="bootstrap/bootstrapCSS.html">
+    <meta charset="UTF-8">
     <title>Checkman create</title>
-
-    <div th:insert="bootstrap/bootstrapCSS.html"></div>
 </head>
 
+<body>
 <div th:insert="navbars/adminNav.html"></div>
 <div class="container mt-5">
-    <body>
 
     <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
 
     <form th:action="'/checkman/create'" method="post">
         <div class="form-group">
-            <input type="text" class="form-control" required name="username" placeholder="Логин">
+            <label>
+                <input type="text" class="form-control" required name="username" placeholder="Логин">
+            </label>
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" required name="password" placeholder="Пароль">
+            <label>
+                <input type="text" class="form-control" required name="password" placeholder="Пароль">
+            </label>
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" required name="fullName" placeholder="Имя">
+            <label>
+                <input type="text" class="form-control" required name="fullName" placeholder="Имя">
+            </label>
         </div>
 
         <button type="submit" class="btn btn-primary">Создать</button>
@@ -31,8 +35,8 @@
 
     <div th:insert="bootstrap/bootstrapJS.html"></div>
 
-    </body>
 </div>
+</body>
 </html>
 
 

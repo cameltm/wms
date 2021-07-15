@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:insert="bootstrap/bootstrapCSS.html">
     <meta charset="UTF-8">
     <title>Order list</title>
-
-    <div th:insert="bootstrap/bootstrapCSS.html"></div>
 </head>
 <body>
 <div th:insert="navbars/checkmanNav.html"></div>
@@ -13,8 +10,9 @@
 <div class="container mt-5">
     <div>
         <form action="/findOrder" method="post">
-            <input type="number" min="1" step="1" class="form-control" name="filter" placeholder="Поиск">
-
+            <label>
+                <input type="number" min="1" step="1" class="form-control" name="filter" placeholder="Поиск">
+            </label>
             <div class="mt-2 mb-2">
                 <button type="submit" class="btn btn-primary">Поиск</button>
             </div>
@@ -23,7 +21,6 @@
         <table class="table">
             <thead class="thead-dark">
             <tr>
-            <tr>
                 <th>Код заказа</th>
                 <th>Продукт</th>
                 <th>Количество</th>
@@ -31,18 +28,15 @@
                 <th>Статус</th>
                 <th>Пользователь</th>
             </tr>
-            </tr>
             </thead>
             <tbody>
-            <tr>
             <tr th:each="order : ${orders}">
-                <td th:utext="${order.id}"> </td>
-                <td th:utext="${order.product.description}"> </td>
+                <td th:utext="${order.id}"></td>
+                <td th:utext="${order.product.description}"></td>
                 <td th:utext="${order.quantity}"></td>
                 <td th:utext="${order.address}"></td>
                 <td th:utext="${order.status}"></td>
                 <td th:utext="${order.user.fullName}"></td>
-            </tr>
             </tr>
             </tbody>
         </table>
@@ -50,4 +44,5 @@
         <div th:insert="bootstrap/bootstrapJS.html"></div>
     </div>
 </div>
-
+</body>
+</html>

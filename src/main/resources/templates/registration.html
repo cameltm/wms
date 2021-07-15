@@ -1,46 +1,50 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="ru">
+<head th:insert="bootstrap/bootstrapCSS.html">
+    <meta charset="UTF-8">
     <title>Registration</title>
-
-    <div th:insert="bootstrap/bootstrapCSS.html"></div>
 </head>
 
+<body>
 <div class="container mt-5">
-    <body>
+
     <div class="alert alert-danger notification" role="alert" th:if="${param.error}">
-        <p> Неверный логин или пароль</p>
-
+        <p>Неверный логин или пароль</p>
     </div>
-    <div class="alert alert-danger notification" role="alert" th:if="${param.logout}">
-        <p> Вы вышли из аккаунта</p>
 
+    <div class="alert alert-danger notification" role="alert" th:if="${param.logout}">
+        <p>Вы вышли из аккаунта</p>
     </div>
 
     <div th:if="${existedUsername != null}" class="alert alert-danger notification" role="alert">
-        <p> Пользователь уже существует</p>
+        <p>Пользователь уже существует</p>
     </div>
 
     <form th:action="@{/registration}" method="post">
         <div class="form-group">
-            <input type="text" class="form-control" required name="username" placeholder="Логин">
+            <label>User name
+                <input type="text" class="form-control" required name="username" placeholder="Логин">
+            </label>
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" required  name="fullName" placeholder="ФИО">
+            <label>Full name
+                <input type="text" class="form-control" required name="fullName" placeholder="Полное имя">
+            </label>
         </div>
 
         <div class="form-group">
-            <input type="password" class="form-control" required name="password" placeholder="Пароль">
+            <label>Password
+                <input type="password" class="form-control" required name="password" placeholder="Пароль">
+            </label>
         </div>
         <button type="submit" class="btn btn-primary" value="Sign In">Вход</button>
     </form>
 
-    <div><a href="registration">Add new user</a></div>
+    <div><a href="registration">Регистрация</a></div>
 
     <div th:insert="bootstrap/bootstrapJS.html"></div>
-
-    </body>
 </div>
+
+</body>
 </html>
