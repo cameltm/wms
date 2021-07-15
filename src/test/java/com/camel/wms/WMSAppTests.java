@@ -1,4 +1,4 @@
-package com.bsuir.WarehouseManagementSystem;
+package com.camel.wms;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
