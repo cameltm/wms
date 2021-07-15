@@ -6,28 +6,47 @@
 </head>
 
 <body>
-<div class="container mt-5">
+<div class="container-fluid h-100 bg-light text-dark">
+
     <div class="alert alert-danger" role="alert" th:if="${param.error}">
         Неверный логин или пароль
     </div>
     <div class="alert alert-danger" role="alert" th:if="${param.logout}">
         Вы вышли из аккаунта
     </div>
-    <form th:action="@{/login}" method="post">
-        <div class="form-group">
-            <input type="text" class="form-control" required name="username" placeholder="Логин">
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" required name="password" placeholder="Пароль">
-        </div>
-        <button type="submit" class="btn btn-primary" value="Sign In">Вход</button>
-    </form>
-    <br>
-    <div><a href="registration">Зарегистрироваться</a></div>
 
-    <div th:insert="fragments/copyright"></div>
-    <div th:insert="bootstrap/bootstrapJS.html"></div>
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <form th:action="@{/login}" method="post">
 
+                <div class="form-group">
+                    <label for="username" class="col-sm-2 col-form-label">Пользователь</label>
+                    <input type="text" class="form-control" required name="username" id="username" placeholder="Логин">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 col-form-label">Пароль</label>
+                    <input type="password" class="form-control" required name="password" id="password"
+                           placeholder="Пароль">
+                </div>
+
+                <div class="form-group">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-md-right">
+                                <button type="submit" class="btn btn-primary" value="Sign In">Вход</button>
+                            </div>
+                            <div class="col text-md-left"><a href="registration">Зарегистрироваться</a></div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div>
+        <div th:insert="fragments/copyright"></div>
+    </div>
 </div>
+<div th:insert="bootstrap/bootstrapJS.html"></div>
 </body>
 </html>
