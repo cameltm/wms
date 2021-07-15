@@ -19,7 +19,7 @@
         </form>
 
         <table class="table">
-            <thead class="thead-dark">
+            <thead class="thead-light">
             <tr>
                 <th>Код заказа</th>
                 <th>Продукт</th>
@@ -41,8 +41,9 @@
             </tbody>
         </table>
 
-        <div th:insert="bootstrap/bootstrapJS.html"></div>
+        <div th:insert="fragments/copyright"></div>
     </div>
 </div>
+<div th:insert="bootstrap/bootstrapJS.html"></div>
 </body>
 </html>

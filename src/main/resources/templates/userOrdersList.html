@@ -6,12 +6,14 @@
 </head>
 
 <body>
+
 <div th:insert="navbars/userNav.html"></div>
+
 <div class="container mt-5">
     <div>
 
-        <table class="table">
-            <thead class="thead-dark">
+        <table class="table table-light">
+            <thead class="thead-light">
             <tr>
                 <th>Продукт</th>
                 <th>Количество</th>
@@ -23,7 +25,6 @@
 
             <tbody>
             <tr th:each="order : ${orders}">
-
                 <td th:utext="${order.product.description}"></td>
                 <td th:utext="${order.quantity}"></td>
                 <td th:utext="${order.address}"></td>
@@ -40,8 +41,12 @@
             </tbody>
         </table>
 
-        <div th:insert="bootstrap/bootstrapJS.html"></div>
     </div>
+
+    <div th:insert="fragments/copyright"></div>
 </div>
+
+<div th:insert="bootstrap/bootstrapJS.html"></div>
+
 </body>
 </html>

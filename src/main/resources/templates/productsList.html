@@ -12,8 +12,8 @@
 <div class="container mt-5">
     <div>
 
-        <table class="table">
-            <thead class="thead-dark">
+        <table class="table table-light">
+            <thead class="thead-light">
             <tr>
                 <th>Описание</th>
                 <th>Количество</th>
@@ -24,14 +24,14 @@
             <tr th:each="product : ${products}">
                 <td th:utext="${product.getValue}">Описание</td>
                 <td th:utext="${product.getKey}">Количество</td>
-                <td><a th:href="'/product/'+${product.getValue()}+'/edit'">Редактировать</a></td>
+                <td><a th:href="'/product/'+${product.getValue()}+'/edit'" class="btn btn-light">Редактировать</a></td>
             </tr>
             </tbody>
         </table>
 
-        <div th:insert="bootstrap/bootstrapJS.html"></div>
     </div>
+    <div th:insert="fragments/copyright"></div>
 </div>
-
+<div th:insert="bootstrap/bootstrapJS.html"></div>
 </body>
 </html>

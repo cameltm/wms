@@ -10,7 +10,6 @@
 <div class="container mt-5">
 
     <div>
-
         <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}">
         </div>
 
@@ -40,9 +39,11 @@
                 <button type="submit" class="btn btn-primary">Заказать</button>
             </div>
         </form>
-
-        <div th:insert="bootstrap/bootstrapJS.html"></div>
     </div>
+
+    <div th:insert="fragments/copyright"></div>
 </div>
+
+<div th:insert="bootstrap/bootstrapJS.html"></div>
 </body>
 </html>

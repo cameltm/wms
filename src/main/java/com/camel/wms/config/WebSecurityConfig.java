@@ -45,8 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-//                .requestMatchers(CorsUtils.)
-//                .requestMatchers(CorsUtils::isPreFlightRequest)
+                .requestMatchers(CorsUtils::isPreFlightRequest)
                 .antMatchers("/webjars/**");
     }
 

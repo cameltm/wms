@@ -116,7 +116,9 @@ public class ProductService {
     }
 
     public void productsPlacement(Integer productsForNewBoxesQuantity, Long productId) {
-        Double requiredBoxesQuantity = Math.ceil((double) productsForNewBoxesQuantity / boxRepository.getBoxCapacity());
+
+        double requiredBoxesQuantity =
+                Math.ceil((double) productsForNewBoxesQuantity / boxRepository.getBoxCapacity());
 
         for (int i = 0; i < requiredBoxesQuantity; i++) {
             createAndPlaceBox(productId, productsForNewBoxesQuantity);
